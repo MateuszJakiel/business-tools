@@ -3,72 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Contact QR Code Generator - Create vCard QR Codes Instantly</title>
-    <meta name="description" content="Free QR code generator for phone contacts. Create scannable vCard QR codes that add contact info directly to iPhone and Android phones. No signup required.">
-    <meta name="keywords" content="QR code generator contact, vCard QR code, contact QR code maker, phone number QR generator, free contact QR generator, digital business card QR code, add contact QR code, mobile contact QR generator">
-    <meta name="author" content="Contact QR Generator">
+    <title>Free QR Code Generator - Contact, WiFi, Payment, Location & More</title>
+    <meta name="description" content="Comprehensive QR code generator for contacts, WiFi passwords, payments (PayPal, Revolut), locations, calendar events, and social media. Free universal QR tool.">
+    <meta name="keywords" content="QR code generator, vCard QR code, WiFi QR code, PayPal QR code, Revolut QR code, payment QR code, location QR code, calendar event QR, social media QR">
+    <meta name="author" content="Universal QR Generator">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Free Contact QR Code Generator - Create vCard QR Codes">
-    <meta property="og:description" content="Generate QR codes for phone contacts that work on iPhone and Android. Free, fast, and no registration required.">
+    <meta property="og:title" content="Free Universal QR Code Generator - Contact, WiFi, Payment & More">
+    <meta property="og:description" content="Generate QR codes for contacts, WiFi, payments (PayPal, Revolut), locations, events, and social media. Free comprehensive tool.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Free Contact QR Code Generator">
-    <meta name="twitter:description" content="Create QR codes for phone contacts - works on iPhone and Android">
     <link rel="canonical" href="">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Contact QR Code Generator",
-      "description": "Free online tool to create QR codes for phone contacts and digital business cards",
-      "url": "",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "Web Browser",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "featureList": [
-        "vCard QR code generation",
-        "Phone contact QR codes",
-        "Digital business card QR codes",
-        "iPhone and Android compatible",
-        "Free QR code download"
-      ]
-    }
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
+            line-height: 1.6;
         }
         
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
             background: white;
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
         }
         
-        h1 {
-            text-align: center;
+        .header h1 {
             color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: 2.2em;
+            font-size: 2.5em;
             font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+        
+        .generator-panel {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            overflow-x: auto;
+        }
+        
+        .tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #666;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: #667eea;
+            background: white;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab:hover {
+            background: #e9ecef;
+        }
+        
+        .tab-content {
+            padding: 30px;
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
         }
         
         .form-group {
             margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
         
         label {
@@ -78,25 +123,62 @@
             color: #34495e;
         }
         
-        input[type="text"], input[type="tel"], input[type="email"] {
+        input, select, textarea {
             width: 100%;
             padding: 12px 16px;
             border: 2px solid #e1e8ed;
             border-radius: 12px;
             font-size: 16px;
             transition: all 0.3s ease;
-            box-sizing: border-box;
+            font-family: inherit;
         }
         
-        input:focus {
+        input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
         
-        button {
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .payment-service {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 15px;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-service:hover {
+            border-color: #667eea;
+        }
+        
+        .payment-service.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .generate-btn {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
@@ -108,18 +190,24 @@
             margin-top: 20px;
         }
         
-        button:hover {
+        .generate-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
         }
         
-        button:active {
-            transform: translateY(0);
+        .result-panel {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: center;
+            position: sticky;
+            top: 20px;
         }
         
-        .qr-container {
-            margin-top: 30px;
-            text-align: center;
+        .qr-display {
+            margin: 20px 0;
+            position: relative;
         }
         
         #qrcode {
@@ -128,7 +216,87 @@
             background: white;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin: 20px 0;
+        }
+        
+        .qr-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 50%;
+            padding: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+        }
+        
+        .customize-btn {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+        }
+        
+        .share-btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+        }
+        
+        .customization {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            display: none;
+        }
+        
+        .customization.show {
+            display: block;
+        }
+        
+        .color-picker {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .color-option.selected {
+            border-color: #667eea;
+            transform: scale(1.1);
         }
         
         .instructions {
@@ -139,19 +307,14 @@
             border-left: 4px solid #667eea;
         }
         
-        .instructions h3 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-        
         .device-steps {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-top: 15px;
         }
         
         .device-step {
-            flex: 1;
             padding: 15px;
             background: white;
             border-radius: 8px;
@@ -159,222 +322,739 @@
         }
         
         .device-step h4 {
-            margin-top: 0;
+            margin-bottom: 10px;
             color: #667eea;
         }
         
-        .download-btn {
-            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-            width: auto;
-            padding: 10px 20px;
-            margin: 20px auto;
-            display: block;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
-            text-align: center;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .download-btn:hover {
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-        }
-        
-        @media (max-width: 600px) {
-            .device-steps {
-                flex-direction: column;
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
             }
             
+            .result-panel {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
             .container {
+                padding: 10px;
+            }
+            
+            .header {
                 padding: 20px;
             }
             
-            h1 {
-                font-size: 1.8em;
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: left;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📱 Free Contact QR Code Generator</h1>
-        <p style="text-align: center; color: #666; margin-bottom: 30px; font-size: 16px;">Create vCard QR codes for phone contacts - works on iPhone and Android</p>
-        
-        <form id="contactForm">
-            <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" required placeholder="John Doe">
-            </div>
-            
-            <div class="form-group">
-                <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" required placeholder="+1-555-123-4567">
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email (Optional)</label>
-                <input type="email" id="email" placeholder="john@example.com">
-            </div>
-            
-            <div class="form-group">
-                <label for="company">Company (Optional)</label>
-                <input type="text" id="company" placeholder="ABC Corp">
-            </div>
-            
-            <div class="form-group">
-                <label for="title">Job Title (Optional)</label>
-                <input type="text" id="title" placeholder="Software Engineer">
-            </div>
-            
-            <button type="submit">Generate QR Code</button>
-        </form>
-        
-        <div class="qr-container" id="qrContainer" style="display: none;">
-            <h2>Scan with your phone camera:</h2>
-            <div id="qrcode"></div>
-            <button class="download-btn" onclick="downloadQR()">📥 Download QR Code</button>
+        <div class="header">
+            <h1>🔗 Universal QR Generator</h1>
+            <p>Create QR codes for contacts, WiFi, payments, locations, events, and more</p>
         </div>
         
-        <div class="instructions">
-            <h2>How to add contacts with QR codes:</h2>
-            <div class="device-steps">
-                <div class="device-step">
-                    <h3>📱 iPhone Contact QR Code</h3>
-                    <p>1. Open Camera app<br>
-                    2. Point at QR code<br>
-                    3. Tap notification<br>
-                    4. Tap "Add Contact"</p>
+        <div class="main-content">
+            <div class="generator-panel">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('contact')">📱 Contact</button>
+                    <button class="tab" onclick="switchTab('wifi')">📶 WiFi</button>
+                    <button class="tab" onclick="switchTab('payment')">💳 Payment</button>
+                    <button class="tab" onclick="switchTab('location')">📍 Location</button>
+                    <button class="tab" onclick="switchTab('calendar')">📅 Calendar</button>
+                    <button class="tab" onclick="switchTab('social')">📱 Social</button>
+                    <button class="tab" onclick="switchTab('link')">🔗 Link</button>
                 </div>
-                <div class="device-step">
-                    <h3>🤖 Android Contact QR Code</h3>
-                    <p>1. Open Camera or Google Lens<br>
-                    2. Point at QR code<br>
-                    3. Tap the link<br>
-                    4. Choose "Add Contact"</p>
+                
+                <!-- Contact Tab -->
+                <div id="contact-tab" class="tab-content active">
+                    <h3>Create Contact QR Code (vCard)</h3>
+                    <div class="form-group">
+                        <label for="contact-name">Full Name *</label>
+                        <input type="text" id="contact-name" placeholder="Jan Kowalski">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-phone">Phone Number *</label>
+                            <input type="tel" id="contact-phone" placeholder="+48 123 456 789">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" placeholder="jan@example.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-company">Company</label>
+                            <input type="text" id="contact-company" placeholder="ABC Sp. z o.o.">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-title">Job Title</label>
+                            <input type="text" id="contact-title" placeholder="Software Engineer">
+                        </div>
+                    </div>
+                    <button class="generate-btn" onclick="generateQR('contact')">Generate Contact QR</button>
+                </div>
+                
+                <!-- WiFi Tab -->
+                <div id="wifi-tab" class="tab-content">
+                    <h3>Create WiFi QR Code</h3>
+                    <div class="form-group">
+                        <label for="wifi-ssid">Network Name (SSID) *</label>
+                        <input type="text" id="wifi-ssid" placeholder="MyWiFiNetwork">
+                    </div>
+                    <div class="form-group">
+                        <label for="wifi-password">Password *</label>
+                        <input type="password" id="wifi-password" placeholder="MyPassword123">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="wifi-security">Security Type</label>
+                            <select id="wifi-security">
+                                <option value="WPA">WPA/WPA2</option>
+                                <option value="WEP">WEP</option>
+                                <option value="nopass">No Password</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="wifi-hidden">Hidden Network</label>
+                            <select id="wifi-hidden">
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="generate-btn" onclick="generateQR('wifi')">Generate WiFi QR</button>
+                </div>
+                
+                <!-- Payment Tab -->
+                <div id="payment-tab" class="tab-content">
+                    <h3>Create Payment QR Code</h3>
+                    <div class="form-group">
+                        <label>Select Payment Service</label>
+                        <div class="payment-service" onclick="selectPayment('paypal')" data-service="paypal">
+                            <div class="payment-icon" style="background: #0070ba;">💙</div>
+                            <div>
+                                <strong>PayPal</strong>
+                                <div style="font-size: 12px; color: #666;">International payments</div>
+                            </div>
+                        </div>
+                        <div class="payment-service" onclick="selectPayment('revolut')" data-service="revolut">
+                            <div class="payment-icon" style="background: #0075eb;">🏦</div>
+                            <div>
+                                <strong>Revolut</strong>
+                                <div style="font-size: 12px; color: #666;">Profile link only</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="paypal-fields">
+                        <label for="payment-recipient">Recipient/Username *</label>
+                        <input type="text" id="payment-recipient" placeholder="username or phone number">
+                    </div>
+                    <div class="form-group" id="revolut-fields" style="display: none;">
+                        <label for="revolut-username">Revolut Username *</label>
+                        <input type="text" id="revolut-username" placeholder="@yourusername">
+                        <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                            💡 Need to specify an amount? Use the <strong>Link</strong> tab to create a custom Revolut payment link with amount.
+                        </p>
+                    </div>
+                    <div class="form-row" id="paypal-amount-fields">
+                        <div class="form-group">
+                            <label for="payment-amount">Amount (optional)</label>
+                            <input type="number" id="payment-amount" placeholder="100.00" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="payment-message">Message</label>
+                            <input type="text" id="payment-message" placeholder="Payment for...">
+                        </div>
+                    </div>
+                    <button class="generate-btn" onclick="generateQR('payment')">Generate Payment QR</button>
+                </div>
+                
+                <!-- Location Tab -->
+                <div id="location-tab" class="tab-content">
+                    <h3>Create Location QR Code</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="location-lat">Latitude *</label>
+                            <input type="number" id="location-lat" placeholder="52.2297" step="any">
+                        </div>
+                        <div class="form-group">
+                            <label for="location-lng">Longitude *</label>
+                            <input type="number" id="location-lng" placeholder="21.0122" step="any">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="location-name">Location Name</label>
+                        <input type="text" id="location-name" placeholder="Palace of Culture and Science, Warsaw">
+                    </div>
+                    <div class="form-group">
+                        <label for="location-address">Address</label>
+                        <input type="text" id="location-address" placeholder="plac Defilad 1, 00-901 Warszawa">
+                    </div>
+                    <button class="generate-btn" onclick="generateQR('location')">Generate Location QR</button>
+                    <p style="margin-top: 10px; font-size: 14px; color: #666;">
+                        💡 Tip: Use Google Maps to find exact coordinates
+                    </p>
+                </div>
+                
+                <!-- Calendar Tab -->
+                <div id="calendar-tab" class="tab-content">
+                    <h3>Create Calendar Event QR Code</h3>
+                    <div class="form-group">
+                        <label for="event-title">Event Title *</label>
+                        <input type="text" id="event-title" placeholder="Team Meeting">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="event-start">Start Date & Time *</label>
+                            <input type="datetime-local" id="event-start">
+                        </div>
+                        <div class="form-group">
+                            <label for="event-end">End Date & Time *</label>
+                            <input type="datetime-local" id="event-end">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-location">Location</label>
+                        <input type="text" id="event-location" placeholder="Conference Room A">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-description">Description</label>
+                        <textarea id="event-description" placeholder="Meeting agenda and details..."></textarea>
+                    </div>
+                    <button class="generate-btn" onclick="generateQR('calendar')">Generate Calendar QR</button>
+                </div>
+                
+                <!-- Social Tab -->
+                <div id="social-tab" class="tab-content">
+                    <h3>Create Social Media QR Code</h3>
+                    <div class="form-group">
+                        <label for="social-platform">Platform</label>
+                        <select id="social-platform">
+                            <option value="instagram">Instagram</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="twitter">Twitter/X</option>
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="tiktok">TikTok</option>
+                            <option value="youtube">YouTube</option>
+                            <option value="snapchat">Snapchat</option>
+                            <option value="telegram">Telegram</option>
+                            <option value="whatsapp">WhatsApp</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="social-username">Username/Profile *</label>
+                        <input type="text" id="social-username" placeholder="@yourusername">
+                    </div>
+                    <button class="generate-btn" onclick="generateQR('social')">Generate Social QR</button>
+                </div>
+                
+                <!-- Link Tab -->
+                <div id="link-tab" class="tab-content">
+                    <h3>Create Link/Menu QR Code</h3>
+                    <div class="form-group">
+                        <label for="link-type">Link Type</label>
+                        <select id="link-type">
+                            <option value="website">Website</option>
+                            <option value="menu">Restaurant Menu</option>
+                            <option value="app">App Download</option>
+                            <option value="document">Document/PDF</option>
+                            <option value="video">Video</option>
+                            <option value="custom">Custom Link</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="link-url">URL *</label>
+                        <input type="url" id="link-url" placeholder="https://example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="link-title">Title/Description</label>
+                        <input type="text" id="link-title" placeholder="My Restaurant Menu">
+                    </div>
+                    <button class="generate-btn" onclick="generateQR('link')">Generate Link QR</button>
                 </div>
             </div>
             
-            <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 12px;">
-                <h3>Why use QR codes for contacts?</h3>
-                <p>QR codes for phone contacts eliminate the need to manually type contact information. This <strong>digital business card QR code</strong> generator creates <strong>vCard QR codes</strong> that work seamlessly with both iPhone and Android devices. Simply scan the code and the contact information is automatically added to your phone's contacts.</p>
+            <div class="result-panel">
+                <h3>Your QR Code</h3>
+                <div class="qr-display">
+                    <div id="qrcode"></div>
+                    <div id="qr-overlay" class="qr-overlay" style="display: none;"></div>
+                </div>
                 
-                <p>Perfect for networking events, business cards, email signatures, and anywhere you need to share contact information quickly. Our <strong>free contact QR generator</strong> creates professional QR codes that can include name, phone number, email, company, and job title.</p>
+                <div class="action-buttons">
+                    <button class="action-btn download-btn" onclick="downloadQR()">
+                        📥 Download PNG
+                    </button>
+                    <button class="action-btn customize-btn" onclick="toggleCustomization()">
+                        🎨 Customize
+                    </button>
+                    <button class="action-btn share-btn" onclick="shareQR()">
+                        📤 Share
+                    </button>
+                </div>
+                
+                <div id="customization" class="customization">
+                    <h4>Customize QR Code</h4>
+                    <div class="form-group">
+                        <label>QR Color</label>
+                        <div class="color-picker">
+                            <div class="color-option selected" style="background: #2c3e50;" onclick="changeColor('#2c3e50')" data-color="#2c3e50"></div>
+                            <div class="color-option" style="background: #e74c3c;" onclick="changeColor('#e74c3c')" data-color="#e74c3c"></div>
+                            <div class="color-option" style="background: #3498db;" onclick="changeColor('#3498db')" data-color="#3498db"></div>
+                            <div class="color-option" style="background: #2ecc71;" onclick="changeColor('#2ecc71')" data-color="#2ecc71"></div>
+                            <div class="color-option" style="background: #f39c12;" onclick="changeColor('#f39c12')" data-color="#f39c12"></div>
+                            <div class="color-option" style="background: #9b59b6;" onclick="changeColor('#9b59b6')" data-color="#9b59b6"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="qr-size">Size</label>
+                        <select id="qr-size" onchange="changeSize(this.value)">
+                            <option value="200">Small (200px)</option>
+                            <option value="300" selected>Medium (300px)</option>
+                            <option value="400">Large (400px)</option>
+                            <option value="500">Extra Large (500px)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <h4>How to scan QR codes:</h4>
+                    <div class="device-steps">
+                        <div class="device-step">
+                            <h4>📱 iPhone</h4>
+                            <p>Open Camera app → Point at QR code → Tap notification</p>
+                        </div>
+                        <div class="device-step">
+                            <h4>🤖 Android</h4>
+                            <p>Open Camera or Google Lens → Point at QR code → Tap link</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        let currentQRDataURL = null;
+        let currentQRData = '';
+        let currentQRType = 'contact';
+        let currentQRColor = '#2c3e50';
+        let currentQRSize = 300;
+        let selectedPaymentService = '';
         
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            generateQRCode();
-        });
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            currentQRType = tabName;
+        }
         
-        function generateQRCode() {
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const company = document.getElementById('company').value.trim();
-            const title = document.getElementById('title').value.trim();
+        function selectPayment(service) {
+            // Remove selection from all payment services
+            document.querySelectorAll('.payment-service').forEach(elem => {
+                elem.classList.remove('selected');
+            });
+            
+            // Select clicked service
+            document.querySelector(`[data-service="${service}"]`).classList.add('selected');
+            selectedPaymentService = service;
+            
+            // Show/hide appropriate fields
+            const paypalFields = document.getElementById('paypal-fields');
+            const revolutFields = document.getElementById('revolut-fields');
+            const amountFields = document.getElementById('paypal-amount-fields');
+            
+            if (service === 'revolut') {
+                paypalFields.style.display = 'none';
+                revolutFields.style.display = 'block';
+                amountFields.style.display = 'none';
+            } else {
+                paypalFields.style.display = 'block';
+                revolutFields.style.display = 'none';
+                amountFields.style.display = 'block';
+            }
+        }
+        
+        function generateQR(type) {
+            let qrData = '';
+            
+            switch(type) {
+                case 'contact':
+                    qrData = generateContactData();
+                    break;
+                case 'wifi':
+                    qrData = generateWiFiData();
+                    break;
+                case 'payment':
+                    qrData = generatePaymentData();
+                    break;
+                case 'location':
+                    qrData = generateLocationData();
+                    break;
+                case 'calendar':
+                    qrData = generateCalendarData();
+                    break;
+                case 'social':
+                    qrData = generateSocialData();
+                    break;
+                case 'link':
+                    qrData = generateLinkData();
+                    break;
+            }
+            
+            if (qrData) {
+                currentQRData = qrData;
+                renderQRCode(qrData);
+            }
+        }
+        
+        function generateContactData() {
+            const name = document.getElementById('contact-name').value.trim();
+            const phone = document.getElementById('contact-phone').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const company = document.getElementById('contact-company').value.trim();
+            const title = document.getElementById('contact-title').value.trim();
             
             if (!name || !phone) {
                 alert('Please fill in at least the name and phone number.');
-                return;
+                return null;
             }
             
-            // Create vCard format
             let vcard = 'BEGIN:VCARD\n';
             vcard += 'VERSION:3.0\n';
             vcard += `FN:${name}\n`;
             vcard += `TEL:${phone}\n`;
-            
-            if (email) {
-                vcard += `EMAIL:${email}\n`;
-            }
-            
-            if (company) {
-                vcard += `ORG:${company}\n`;
-            }
-            
-            if (title) {
-                vcard += `TITLE:${title}\n`;
-            }
-            
+            if (email) vcard += `EMAIL:${email}\n`;
+            if (company) vcard += `ORG:${company}\n`;
+            if (title) vcard += `TITLE:${title}\n`;
             vcard += 'END:VCARD';
             
-            // Clear previous QR code
-            document.getElementById('qrcode').innerHTML = '';
+            return vcard;
+        }
+        
+        function generateWiFiData() {
+            const ssid = document.getElementById('wifi-ssid').value.trim();
+            const password = document.getElementById('wifi-password').value;
+            const security = document.getElementById('wifi-security').value;
+            const hidden = document.getElementById('wifi-hidden').value;
             
-            // Generate QR code
+            if (!ssid) {
+                alert('Please enter the network name (SSID).');
+                return null;
+            }
+            
+            if (security !== 'nopass' && !password) {
+                alert('Please enter the WiFi password.');
+                return null;
+            }
+            
+            return `WIFI:T:${security};S:${ssid};P:${password};H:${hidden};;`;
+        }
+        
+        function generatePaymentData() {
+            if (!selectedPaymentService) {
+                alert('Please select a payment service.');
+                return null;
+            }
+            
+            let paymentUrl = '';
+            
+            if (selectedPaymentService === 'revolut') {
+                const username = document.getElementById('revolut-username').value.trim().replace('@', '');
+                
+                if (!username) {
+                    alert('Please enter your Revolut username.');
+                    return null;
+                }
+                
+                paymentUrl = `https://revolut.me/${username}`;
+                
+            } else if (selectedPaymentService === 'paypal') {
+                const recipient = document.getElementById('payment-recipient').value.trim();
+                const amount = document.getElementById('payment-amount').value;
+                
+                if (!recipient) {
+                    alert('Please enter PayPal recipient information.');
+                    return null;
+                }
+                
+                paymentUrl = `https://paypal.me/${recipient}`;
+                if (amount) paymentUrl += `/${amount}`;
+            }
+            
+            return paymentUrl;
+        }
+        
+        function generateLocationData() {
+            const lat = document.getElementById('location-lat').value;
+            const lng = document.getElementById('location-lng').value;
+            const name = document.getElementById('location-name').value.trim();
+            
+            if (!lat || !lng) {
+                alert('Please enter latitude and longitude.');
+                return null;
+            }
+            
+            let locationUrl = `geo:${lat},${lng}`;
+            if (name) {
+                locationUrl += `?q=${lat},${lng}(${encodeURIComponent(name)})`;
+            }
+            
+            return locationUrl;
+        }
+        
+        function generateCalendarData() {
+            const title = document.getElementById('event-title').value.trim();
+            const start = document.getElementById('event-start').value;
+            const end = document.getElementById('event-end').value;
+            const location = document.getElementById('event-location').value.trim();
+            const description = document.getElementById('event-description').value.trim();
+            
+            if (!title || !start || !end) {
+                alert('Please fill in title, start time, and end time.');
+                return null;
+            }
+            
+            // Convert to UTC format for iCal
+            const startDate = new Date(start).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+            const endDate = new Date(end).toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+            
+            let ical = 'BEGIN:VCALENDAR\n';
+            ical += 'VERSION:2.0\n';
+            ical += 'BEGIN:VEVENT\n';
+            ical += `DTSTART:${startDate}\n`;
+            ical += `DTEND:${endDate}\n`;
+            ical += `SUMMARY:${title}\n`;
+            if (location) ical += `LOCATION:${location}\n`;
+            if (description) ical += `DESCRIPTION:${description}\n`;
+            ical += 'END:VEVENT\n';
+            ical += 'END:VCALENDAR';
+            
+            return ical;
+        }
+        
+        function generateSocialData() {
+            const platform = document.getElementById('social-platform').value;
+            const username = document.getElementById('social-username').value.trim().replace('@', '');
+            
+            if (!username) {
+                alert('Please enter a username.');
+                return null;
+            }
+            
+            const socialUrls = {
+                instagram: `https://instagram.com/${username}`,
+                facebook: `https://facebook.com/${username}`,
+                twitter: `https://twitter.com/${username}`,
+                linkedin: `https://linkedin.com/in/${username}`,
+                tiktok: `https://tiktok.com/@${username}`,
+                youtube: `https://youtube.com/@${username}`,
+                snapchat: `https://snapchat.com/add/${username}`,
+                telegram: `https://t.me/${username}`,
+                whatsapp: `https://wa.me/${username}`
+            };
+            
+            return socialUrls[platform];
+        }
+        
+        function generateLinkData() {
+            const url = document.getElementById('link-url').value.trim();
+            
+            if (!url) {
+                alert('Please enter a URL.');
+                return null;
+            }
+            
+            // Ensure URL has protocol
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                return 'https://' + url;
+            }
+            
+            return url;
+        }
+        
+        function renderQRCode(data) {
             const qr = qrcode(0, 'M');
-            qr.addData(vcard);
+            qr.addData(data);
             qr.make();
             
-            // Create the QR code as SVG
-            const qrSize = 256;
-            const cellSize = qrSize / qr.getModuleCount();
+            const cellSize = currentQRSize / qr.getModuleCount();
             
-            let svg = `<svg width="${qrSize}" height="${qrSize}" xmlns="http://www.w3.org/2000/svg">`;
-            svg += `<rect width="${qrSize}" height="${qrSize}" fill="#ffffff"/>`;
+            let svg = `<svg width="${currentQRSize}" height="${currentQRSize}" xmlns="http://www.w3.org/2000/svg">`;
+            svg += `<rect width="${currentQRSize}" height="${currentQRSize}" fill="#ffffff"/>`;
             
             for (let r = 0; r < qr.getModuleCount(); r++) {
                 for (let c = 0; c < qr.getModuleCount(); c++) {
                     if (qr.isDark(r, c)) {
-                        svg += `<rect x="${c * cellSize}" y="${r * cellSize}" width="${cellSize}" height="${cellSize}" fill="#2c3e50"/>`;
+                        svg += `<rect x="${c * cellSize}" y="${r * cellSize}" width="${cellSize}" height="${cellSize}" fill="${currentQRColor}"/>`;
                     }
                 }
             }
             svg += '</svg>';
             
-            // Display the QR code
             document.getElementById('qrcode').innerHTML = svg;
-            document.getElementById('qrContainer').style.display = 'block';
-            document.getElementById('qrContainer').scrollIntoView({ behavior: 'smooth' });
             
-            // Store SVG data for download by converting to canvas
-            convertSVGToCanvas(svg);
+            // Add overlay icon for payment QRs
+            if (currentQRType === 'payment' && selectedPaymentService) {
+                showPaymentOverlay();
+            } else {
+                document.getElementById('qr-overlay').style.display = 'none';
+            }
         }
         
-        function convertSVGToCanvas(svgString) {
+        function showPaymentOverlay() {
+            const overlay = document.getElementById('qr-overlay');
+            const paymentIcons = {
+                paypal: '💙',
+                revolut: '🏦'
+            };
+            
+            overlay.innerHTML = paymentIcons[selectedPaymentService] || '💳';
+            overlay.style.display = 'block';
+        }
+        
+        function downloadQR() {
+            if (!currentQRData) {
+                alert('Please generate a QR code first.');
+                return;
+            }
+            
+            const svg = document.querySelector('#qrcode svg');
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             const img = new Image();
             
-            canvas.width = 256;
-            canvas.height = 256;
+            canvas.width = currentQRSize;
+            canvas.height = currentQRSize;
             
             img.onload = function() {
                 ctx.drawImage(img, 0, 0);
-                currentQRDataURL = canvas.toDataURL();
+                
+                const link = document.createElement('a');
+                link.download = `${currentQRType}_qr_code.png`;
+                link.href = canvas.toDataURL();
+                link.click();
             };
             
-            const svgBlob = new Blob([svgString], {type: 'image/svg+xml'});
+            const svgBlob = new Blob([svg.outerHTML], {type: 'image/svg+xml'});
             const url = URL.createObjectURL(svgBlob);
             img.src = url;
         }
         
-        function downloadQR() {
-            if (!currentQRDataURL) return;
-            
-            const name = document.getElementById('name').value.trim();
-            const link = document.createElement('a');
-            link.download = `${name.replace(/\s+/g, '_')}_contact_qr.png`;
-            link.href = currentQRDataURL;
-            link.click();
+        function toggleCustomization() {
+            const customization = document.getElementById('customization');
+            customization.classList.toggle('show');
         }
         
-        // Auto-format phone number
-        document.getElementById('phone').addEventListener('input', function(e) {
+        function changeColor(color) {
+            currentQRColor = color;
+            
+            // Update UI
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelector(`[data-color="${color}"]`).classList.add('selected');
+            
+            // Regenerate QR with new color
+            if (currentQRData) {
+                renderQRCode(currentQRData);
+            }
+        }
+        
+        function changeSize(size) {
+            currentQRSize = parseInt(size);
+            
+            // Regenerate QR with new size
+            if (currentQRData) {
+                renderQRCode(currentQRData);
+            }
+        }
+        
+        function shareQR() {
+            if (navigator.share && currentQRData) {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const svg = document.querySelector('#qrcode svg');
+                const img = new Image();
+                
+                canvas.width = currentQRSize;
+                canvas.height = currentQRSize;
+                
+                img.onload = function() {
+                    ctx.drawImage(img, 0, 0);
+                    canvas.toBlob(function(blob) {
+                        const file = new File([blob], 'qr-code.png', {type: 'image/png'});
+                        navigator.share({
+                            title: 'QR Code',
+                            text: 'Check out this QR code!',
+                            files: [file]
+                        });
+                    });
+                };
+                
+                const svgBlob = new Blob([svg.outerHTML], {type: 'image/svg+xml'});
+                const url = URL.createObjectURL(svgBlob);
+                img.src = url;
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(currentQRData).then(() => {
+                    alert('QR code data copied to clipboard!');
+                });
+            }
+        }
+        
+        // Auto-format phone number for Polish format
+        document.getElementById('contact-phone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 10) {
-                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+            if (value.startsWith('48')) {
+                value = '+48 ' + value.substring(2);
+            } else if (value.length >= 9) {
+                value = '+48 ' + value;
             }
             e.target.value = value;
+        });
+        
+        // Generate default contact QR on load
+        window.addEventListener('load', function() {
+            // Set default values
+            document.getElementById('contact-name').value = 'Jan Kowalski';
+            document.getElementById('contact-phone').value = '+48 123 456 789';
+            document.getElementById('contact-email').value = 'jan@example.com';
+            generateQR('contact');
         });
     </script>
 </body>
