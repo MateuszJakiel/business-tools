@@ -12,6 +12,7 @@
     <meta property="og:description" content="Generate QR codes for contacts, WiFi, payments (PayPal, Revolut), locations, events, and social media. Free comprehensive tool.">
     <meta property="og:type" content="website">
     <link rel="canonical" href="">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔗</text></svg>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <style>
         * {
@@ -370,8 +371,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔗 Universal QR Generator</h1>
-            <p>Create QR codes for contacts, WiFi, payments, locations, events, and more</p>
+            <h1>🔗 Universal QR Code Generator</h1>
+            <p>Create QR codes for contacts, WiFi, payments, locations, calendar events, social media, and custom links</p>
         </div>
         
         <div class="main-content">
@@ -494,27 +495,17 @@
                 <!-- Location Tab -->
                 <div id="location-tab" class="tab-content">
                     <h3>Create Location QR Code</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="location-lat">Latitude *</label>
-                            <input type="number" id="location-lat" placeholder="52.2297" step="any">
-                        </div>
-                        <div class="form-group">
-                            <label for="location-lng">Longitude *</label>
-                            <input type="number" id="location-lng" placeholder="21.0122" step="any">
-                        </div>
+                    <div class="form-group">
+                        <label for="location-address">Address *</label>
+                        <input type="text" id="location-address" placeholder="plac Defilad 1, Warsaw">
                     </div>
                     <div class="form-group">
-                        <label for="location-name">Location Name</label>
-                        <input type="text" id="location-name" placeholder="Palace of Culture and Science, Warsaw">
-                    </div>
-                    <div class="form-group">
-                        <label for="location-address">Address</label>
-                        <input type="text" id="location-address" placeholder="plac Defilad 1, 00-901 Warszawa">
+                        <label for="location-name">Location Name (optional)</label>
+                        <input type="text" id="location-name" placeholder="Palace of Culture and Science">
                     </div>
                     <button class="generate-btn" onclick="generateQR('location')">Generate Location QR</button>
                     <p style="margin-top: 10px; font-size: 14px; color: #666;">
-                        💡 Tip: Use Google Maps to find exact coordinates
+                        📍 QR code will open location in Google Maps. Works on all devices.
                     </p>
                 </div>
                 
@@ -650,6 +641,13 @@
                             <h4>🤖 Android</h4>
                             <p>Open Camera or Google Lens → Point at QR code → Tap link</p>
                         </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 12px;">
+                        <h4>Why use our Universal QR Code Generator?</h4>
+                        <p>Generate <strong>QR codes for any purpose</strong> with our comprehensive tool. Create <strong>contact vCard QR codes</strong> for business cards, <strong>WiFi QR codes</strong> for easy network sharing, <strong>payment QR codes</strong> for PayPal and Revolut, <strong>location QR codes</strong> for addresses, <strong>calendar event QR codes</strong> for meetings, <strong>social media QR codes</strong> for profiles, and <strong>custom link QR codes</strong> for websites and menus.</p>
+                        
+                        <p>Our <strong>free QR code generator</strong> works on all devices and creates professional QR codes that are compatible with iPhone and Android. Perfect for businesses, restaurants, events, networking, and personal use. Customize colors and sizes, then download as PNG files.</p>
                     </div>
                 </div>
             </div>
@@ -820,21 +818,20 @@
         }
         
         function generateLocationData() {
-            const lat = document.getElementById('location-lat').value;
-            const lng = document.getElementById('location-lng').value;
+            const address = document.getElementById('location-address').value.trim();
             const name = document.getElementById('location-name').value.trim();
             
-            if (!lat || !lng) {
-                alert('Please enter latitude and longitude.');
+            if (!address) {
+                alert('Please enter an address.');
                 return null;
             }
             
-            let locationUrl = `geo:${lat},${lng}`;
-            if (name) {
-                locationUrl += `?q=${lat},${lng}(${encodeURIComponent(name)})`;
-            }
+            // Create Google Maps search URL
+            const searchQuery = name ? `${name}, ${address}` : address;
+            const encodedQuery = encodeURIComponent(searchQuery);
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
             
-            return locationUrl;
+            return googleMapsUrl;
         }
         
         function generateCalendarData() {
